@@ -8,11 +8,14 @@ const characterName = document.querySelector("#charName");
 const display = document.querySelector("#display");
 const charHeader = document.querySelector("#CharacterTitle");
 const form = document.querySelector("form");
+const charImage = document.querySelector("#ImageChar");
+const details = document.querySelector("#charDetails");
 
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
-    display.innerHTML = "";
+    details.innerHTML = "";
+    charImage.src = "";
     charHeader.innerHTML = "";
     loadCharInfo(searchBar.value);
 });
@@ -146,20 +149,20 @@ function characterSearch2(name){
 async function addCharacterImage(charId) {
     try {
         const id = charId;
- 
+
         if (id == -1) {
-            charHeader.innerText = "Character not found."
+            charHeader.innerText = "Character not found.";
             return;
         }
-        const charImage = document.createElement("img");
+
 
         charImage.src = `https://vieraboschkova.github.io/swapi-gallery/static/assets/img/people/${id}.jpg`;
         charImage.classList.add("charPic");
-        display.append(charImage);
     } catch (error) {
         console.error('Failed to add character image:', error);
     }
 }
+
 
 
 async function addCharacterDetails(charId) {
@@ -170,11 +173,13 @@ async function addCharacterDetails(charId) {
         if (id == -1) {
             return;
         }
-        const charInfo = document.createElement("p");
+        
         const character = await axios.get(`https://swapi.dev/api/people/${id}/`);
-        charInfo.innerHTML = `Birth year: ${character.data.birth_year}<br>Gender: ${character.data.gender}<br>Height: ${character.data.height}<br>Home Planet: ${home}`;
-        charInfo.classList.add("text")
-        display.append(charInfo);
+
+        
+        details.innerHTML = `Birth year: ${character.data.birth_year}<br>Gender: ${character.data.gender}<br>Height: ${character.data.height}<br>Home Planet: ${home}`;
+        details.classList.add("text")
+        // display.append(charInfo);
 
         charHeader.innerHTML = character.data.name;
     }
@@ -203,13 +208,28 @@ async function getHomePlanet(charId) {
     }
 }
 
-
-
 function loadCharInfo(name) {
     console.log(name);
     addCharacterImage(characterSearch2(name));
     addCharacterDetails(characterSearch2(name));
 }
+
+// async function loadCharInfo(name) {
+//     try {
+//         const charId = characterSearch2(name);
+
+//        // Make sure both image and details are loaded before updating the DOM
+//         const imagePromise = addCharacterImage(charId);
+//         const detailsPromise = addCharacterDetails(charId);
+
+//         // Wait for both promises to resolve
+//         await Promise.all([imagePromise, detailsPromise]);
+
+//     } catch (error) {
+//         console.error('Failed to load character info:', error);
+//     }
+// }
+
 
 
 

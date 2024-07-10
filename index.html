@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Star Wars</title>
 </head>
+
 <body>
     <main>
-        <h1 id = "heading">&nbsp;Star Wars<br>Character Search</h1>
+        <h1 id="heading">&nbsp;Star Wars<br>Character Search</h1>
         <form action="">
             <input type="text" id="searchBar" autocomplete="off">
             <button id="searchButton">Search</button>
         </form>
-        <h2 id = CharacterTitle></h2>
-        <section id = "display">
-            <h2 id = "charName"></h2>
+        <h2 id=CharacterTitle></h2>
+        <section id="display">
+            <img src="" id="ImageChar">
+            <p id="charDetails"></p>
 
         </section>
 
 
 
     </main>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
